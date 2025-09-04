@@ -1,8 +1,8 @@
-export function setWithTTL(key: string, value: string, ttlMs) {
+export function setWithTTL(key: string, value: string, ttlMs: string) {
   const record = { value, exp: Date.now() + ttlMs };
   localStorage.setItem(key, JSON.stringify(record));
 }
-export function getWithTTL(key) {
+export function getWithTTL(key: string) {
   const raw = localStorage.getItem(key);
   if (!raw) return null;
   try {
