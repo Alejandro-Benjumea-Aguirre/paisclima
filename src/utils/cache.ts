@@ -1,4 +1,4 @@
-export function setWithTTL(key: string, value: string, ttlMs: string) {
+export function setWithTTL(key: string, value: string, ttlMs: number) {
   const record = { value, exp: Date.now() + ttlMs };
   localStorage.setItem(key, JSON.stringify(record));
 }
