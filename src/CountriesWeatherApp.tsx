@@ -1,43 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "./components/layout/Header";
 import { CountryCard } from "./components/country/CountryCard";
 import { StatsCard } from "./components/common/StartCard";
 
 import { Globe, Thermometer, Eye, Wind } from "lucide-react";
 import { SearchFilters } from "./components/common/SearchFilters";
-
-const mockCountries = [
-  {
-    name: "Colombia",
-    flag: "🇨🇴",
-    capital: "Bogotá",
-    population: "50,882,891",
-    region: "South America",
-    weather: { temp: 24, condition: "Partly Cloudy", icon: "cloud" },
-  },
-  {
-    name: "United States",
-    flag: "🇺🇸",
-    capital: "Washington, D.C.",
-    population: "331,002,651",
-    region: "North America",
-    weather: { temp: 18, condition: "Sunny", icon: "sun" },
-  },
-  {
-    name: "Japan",
-    flag: "🇯🇵",
-    capital: "Tokyo",
-    population: "125,836,021",
-    region: "Asia",
-    weather: { temp: 22, condition: "Rainy", icon: "rain" },
-  },
-];
+import { useCountries } from "./hooks/useCountries";
 
 export default function CountriesWeatherApp() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [favorites, setFavorites] = useState(new Set());
   const [isDark, setIsDark] = useState(false);
+
+  const { countries, loading, error } = useCountries();
 
   const toggleFavorite = (countryName: string) => {
     const newFavorites = new Set(favorites);
@@ -101,9 +77,9 @@ export default function CountriesWeatherApp() {
 
         {/* Countries Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {mockCountries.map((country) => (
+          {countries.map((country, key) => (
             <CountryCard
-              key={country.name}
+              key={key}
               country={country}
               isFavorite={favorites.has(country.name)}
               onToggleFavorite={toggleFavorite}

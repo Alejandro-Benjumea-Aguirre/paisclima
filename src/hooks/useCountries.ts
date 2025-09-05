@@ -17,6 +17,7 @@ export function useCountries() {
 
     getAllCountries()
       .then((data) => {
+        console.log(data);
         setCountries(data);
         setWithTTL(cacheKey, data, 1000 * 60 * 60 * 24); // 1 día
       })

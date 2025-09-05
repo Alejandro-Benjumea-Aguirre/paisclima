@@ -1,24 +1,36 @@
 import { Sun, Cloud, CloudRain, MapPin, Heart, Globe } from "lucide-react";
 import { Button } from "../ui/Button";
 import { JSX } from "react";
-import { Country } from "../../types/country";
+import { CountryCardProps } from "../../types/country";
 
-type WeatherType = "sun" | "cloud" | "rain";
-
-const WeatherIcon = ({ type = "sun", className = "w-6 h-6" }) => {
-  const icons: Record<WeatherType, JSX.Element> = {
+const WeatherIcon = ({
+  type = "",
+  className = "w-6 h-6",
+}: {
+  type?: string;
+  className?: string;
+}) => {
+  const icons: Record<string, JSX.Element> = {
     sun: <Sun className={`${className} text-yellow-500`} />,
     cloud: <Cloud className={`${className} text-gray-500`} />,
     rain: <CloudRain className={`${className} text-blue-500`} />,
   };
+
   return icons[type] || icons.sun;
 };
 
 export const CountryCard = ({
-  country = {},
+  country = {
+    name: "Colombia",
+    flag: "🇨🇴",
+    capital: "Bogotá",
+    population: 50882891,
+    region: "South America",
+    weather: { temp: 24, condition: "Partly Cloudy", icon: "cloud" },
+  },
   isFavorite = false,
   onToggleFavorite,
-}) => {
+}: CountryCardProps) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
       {/* Header con bandera y favorito */}

@@ -12,3 +12,9 @@ export interface Country {
   region: string; // continente o región
   weather: WeatherInfo; // clima actual
 }
+
+export interface CountryCardProps {
+  country?: Country;
+  isFavorite?: boolean;
+  onToggleFavorite: (countryName: string) => void; // ✅ Correcto: función que recibe string y no retorna nada
+}
