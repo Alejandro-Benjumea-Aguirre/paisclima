@@ -1,6 +1,37 @@
 import { useState } from "react";
 import { Header } from "./components/layout/Header";
 import { CountryCard } from "./components/country/CountryCard";
+import { StatsCard } from "./components/common/StartCard";
+
+import { Globe, Thermometer, Eye, Wind } from "lucide-react";
+import { SearchFilters } from "./components/common/SearchFilters";
+
+const mockCountries = [
+  {
+    name: "Colombia",
+    flag: "🇨🇴",
+    capital: "Bogotá",
+    population: "50,882,891",
+    region: "South America",
+    weather: { temp: 24, condition: "Partly Cloudy", icon: "cloud" },
+  },
+  {
+    name: "United States",
+    flag: "🇺🇸",
+    capital: "Washington, D.C.",
+    population: "331,002,651",
+    region: "North America",
+    weather: { temp: 18, condition: "Sunny", icon: "sun" },
+  },
+  {
+    name: "Japan",
+    flag: "🇯🇵",
+    capital: "Tokyo",
+    population: "125,836,021",
+    region: "Asia",
+    weather: { temp: 22, condition: "Rainy", icon: "rain" },
+  },
+];
 
 export default function CountriesWeatherApp() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -8,7 +39,7 @@ export default function CountriesWeatherApp() {
   const [favorites, setFavorites] = useState(new Set());
   const [isDark, setIsDark] = useState(false);
 
-  const toggleFavorite = (countryName) => {
+  const toggleFavorite = (countryName: string) => {
     const newFavorites = new Set(favorites);
     if (newFavorites.has(countryName)) {
       newFavorites.delete(countryName);
@@ -46,7 +77,12 @@ export default function CountriesWeatherApp() {
             value="195"
             trend="2"
           />
-          <StatsCard icon={Thermometer} title="Weather Updates" value="24/7" />
+          <StatsCard
+            icon={Thermometer}
+            title="Weather Updates"
+            value="24/7"
+            trend="2"
+          />
           <StatsCard
             icon={Eye}
             title="Countries Viewed"
